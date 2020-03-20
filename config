@@ -1,0 +1,14 @@
+bind Up "+rotleft"
+bind Z "+rotright"
+set $console 1
+set $maxfps 120
+set $showfps 1
+set $skin "default"
+set $t0 "0.png"
+set $t1 "1.png"
+set $t2 "2.png"
+set $t3 "3.png"
+set $t4 "4.png"
+set $t5 "5.png"
+set $t6 "6.png"
+set $t7 "7.png"
