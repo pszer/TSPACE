@@ -45,10 +45,7 @@ extern struct Core {
 
 	bool going = true; // set to false to exit game main loop
 
-	// Returns the scale of how everything should be rendered based on window size.
-	float GetWindowScale( void );
-
-	SDL_Window * window   = nullptr;
+	SDL_Window * window;
 
 	void SetGamestate(CORE_GAMESTATE gs);
 	CORE_GAMESTATE gamestate = GAMESTATE_MENU;

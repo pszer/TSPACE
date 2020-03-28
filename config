@@ -1,14 +1,29 @@
 bind Up "+rotleft"
 bind Z "+rotright"
+bind Space "Classic Tetris::Hard Drop"
+bind Left "Classic Tetris::Move Left"
+bind Right "Classic Tetris::Move Right"
+bind Z "Classic Tetris::Rotate Left"
+bind Up "Classic Tetris::Rotate Right"
+bind Down "Classic Tetris::Soft Drop"
 set $console 1
-set $maxfps 120
+set $ghost 1
+set $mastervolume 0.500000
+set $maxfps 241
+set $renderscalequality 1
+set $score0 "score0.wav"
+set $score1 "score1.wav"
+set $score2 "score2.wav"
+set $score3 "score3.wav"
 set $showfps 1
 set $skin "default"
 set $t0 "0.png"
 set $t1 "1.png"
+set $t127 "127.png"
 set $t2 "2.png"
 set $t3 "3.png"
 set $t4 "4.png"
 set $t5 "5.png"
 set $t6 "6.png"
 set $t7 "7.png"
+set $timescale 1.000000

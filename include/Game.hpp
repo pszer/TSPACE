@@ -16,6 +16,9 @@ extern struct Game {
 	void Update();
 	void Render();
 
+	void SetRuleset(Ruleset * r);
 	Ruleset * ruleset = &CLASSIC_TETRIS;
+	bool playing = false;
+	void BeginGame();
 private:
 } Game;

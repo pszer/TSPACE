@@ -51,7 +51,7 @@ int Core::Init(InitParameters init) {
 		Log::ErrorSDL();
 		return -1;
 	}
-	std::string quality = GetCVarString("renderscalequality");
+	std::string quality = GetCVarString("renderscalequality", "nearest");
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, quality.c_str());
 
 	SDL_SetRenderDrawBlendMode(Renderer.renderer, SDL_BLENDMODE_BLEND);
@@ -158,11 +158,4 @@ void Core::RenderFPS() {
 	else                c = {0x00,0xff,0xff,0xff};
 
 	Renderer.RenderText(Console.font, fps_str, Event.win_w, 0, FONT_P16, c, ALIGN_RIGHT);
-}
-
-float Core::GetWindowScale( void ) {
-	float f = Event.win_h / (float)DEF_WIN_H;
-	f -= fmod(f, WIN_SCALE_STEP);
-	if (f == 0.0) f = WIN_SCALE_STEP;
-	return f;
 }

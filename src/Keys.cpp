@@ -55,7 +55,7 @@ SDL_Keycode Keys::GetBoundKey(const std::string& str) {
 }
 
 void Keys::SetBoundKey(const std::string& str, SDL_Keycode code) {
-	UnbindBoundKey(code); // stops key being bound multiple times
+	//UnbindBoundKey(code); // stops key being bound multiple times
 	Bindings[str] = code;
 }
 

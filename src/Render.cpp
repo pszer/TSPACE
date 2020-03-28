@@ -204,9 +204,8 @@ void Renderer::RenderTiledTexture(const std::string& tex_name, Rect _rect, Vec2 
 	SDL_RenderSetViewport(renderer, nullptr);
 }
 
-#include <iostream>
 SDL_Rect Renderer::RenderText(const std::string& font_name, const std::string& text, int x, int y,
-  FONT_SIZE size, SDL_Color c, TEXT_ALIGN align)
+  FONT_SIZE size, SDL_Color c, TEXT_ALIGN align, double scale)
 {
 	auto font = Media.GetFont(font_name);
 	if (font == nullptr) return {0,0,0,0};
@@ -229,6 +228,9 @@ SDL_Rect Renderer::RenderText(const std::string& font_name, const std::string& t
 
 		int w,h;
 		SDL_QueryTexture(t, NULL, NULL, &w, &h);
+
+		w *= scale;
+		h *= scale;
 
 		SDL_Rect r = Rect(x,y,w,h).ToSDLRect();
 
@@ -278,4 +280,11 @@ void Renderer::RenderText(TTF_Font * font, const std::string& text, int x, int y
 	SDL_FreeSurface(surface);
 	SDL_DestroyTexture(t);
 
+}
+
+double Renderer::GetWindowScale( void ) {
+	double f = Event.win_h / (float)DEF_WIN_H;
+	f -= fmod(f, WIN_SCALE_STEP);
+	if (f == 0.0) f = WIN_SCALE_STEP;
+	return f;
 }

@@ -1,9 +1,16 @@
 #include "Tetrion.hpp"
+#include "Cmd.hpp"
 
 Mino& Shape::At(int8_t x, int8_t y) {
 	return minos.at(x + width*y);
 }
 
+std::string Mino::GetTypeTexture() {
+	std::string skin = GetCVarString("skin");
+	if (skin.empty()) return "";
+	std::string tex = skin + "/" + GetCVarString("t" + std::to_string(type));
+	return tex;
+}
 
 Shape Shape::Rotate(ROTATION direction) {
 	switch (direction) {
@@ -68,4 +75,36 @@ void Tetrion::EmplaceShape(int x, int y, Shape shape) {
 			*loc = m;
 		}
 	}
+}
+
+bool Tetrion::ShapeCollides(int x, int y, Shape shape) {
+	int xi, yi;
+
+	for (xi = 0; xi < shape.width; ++xi) {
+		for (yi = 0; yi < shape.height; ++yi) {
+			Mino m = shape.At(xi, yi);
+
+			if (m.type == 0) continue;
+
+			Mino loc = Get(x + xi, y + yi);
+			if (loc.solid) return true;
+		}
+	}
+
+	return false;
+}
+
+int Tetrion::ShapeCollidesWall(int x, int y, Shape shape) {
+	int xi, yi;
+
+	for (xi = 0; xi < shape.width; ++xi) {
+		for (yi = 0; yi < shape.height; ++yi) {
+			Mino m = shape.At(xi, yi);
+			if (m.type == 0) continue;
+			if (x + xi < 0) return LEFT_WALL;
+			else if (x +xi >= width) return RIGHT_WALL;
+		}
+	}
+
+	return 0;
 }

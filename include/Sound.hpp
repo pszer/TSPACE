@@ -2,6 +2,7 @@
 
 #include "Media.hpp"
 
+#define MASTER_VOLUME "mastervolume"
 #define CHANNELS 16
 
 namespace Sound {

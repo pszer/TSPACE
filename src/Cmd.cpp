@@ -8,21 +8,21 @@ Argument * GetCVar(const std::string& id) {
 	else return &(f->second);
 }
 
-long long GetCVarInt(const std::string& id) {
+long long GetCVarInt(const std::string& id, long long def) {
 	auto a = GetCVar(id);
-	if (a == nullptr) return 0;
+	if (a == nullptr) return def;
 	else return a->ToInt();
 }
 
-double GetCVarFloat(const std::string& id) {
+double GetCVarFloat(const std::string& id, double def) {
 	auto a = GetCVar(id);
-	if (a == nullptr) return 0.0;
+	if (a == nullptr) return def;
 	else return a->ToFloat();
 }
 
-std::string GetCVarString(const std::string& id) {
+std::string GetCVarString(const std::string& id, std::string def) {
 	auto a = GetCVar(id);
-	if (a == nullptr) return "";
+	if (a == nullptr) return def;
 	else return a->ToString();
 }
 

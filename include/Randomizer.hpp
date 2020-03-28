@@ -9,16 +9,17 @@
 // Used to draw random shapes out of a pool.
 class Randomizer {
 public:
-	Randomizer(const std::vector<Shape>& pool):
+	Randomizer(): shape_pool(nullptr) { ; }
+	Randomizer(const std::vector<Shape>* pool):
 	  shape_pool(pool) { ; }
-	Randomizer(const std::vector<Shape>& pool, uint64_t seed):
+	Randomizer(const std::vector<Shape>* pool, uint64_t seed):
 	  shape_pool(pool) { SetSeed(seed); }
 
 	void SetSeed(uint64_t seed) { random.seed(seed); }
 	virtual Shape Next(void) = 0;
 protected:
 	std::default_random_engine random;
-	const std::vector<Shape>& shape_pool;
+	const std::vector<Shape>* shape_pool;
 };
 
 // Used to draw random tetriminoes out of a contaning pool
@@ -27,7 +28,10 @@ protected:
 // tetriminoes are drawn out of this permutation
 class StandardRandomizer : public Randomizer {
 public:
-	StandardRandomizer(const std::vector<Shape>& pool): Randomizer(pool)
+	StandardRandomizer() { ; }
+	StandardRandomizer(const std::vector<Shape>* pool): Randomizer(pool)
+	  { GenerateNextPermutation(); }
+	StandardRandomizer(const std::vector<Shape>* pool, uint64_t seed): Randomizer(pool, seed)
 	  { GenerateNextPermutation(); }
 
 	Shape Next(void);
@@ -43,6 +47,7 @@ private:
 // pieces.
 class NaiveRandomizer : public Randomizer {
 public:
-	NaiveRandomizer(const std::vector<Shape>& pool): Randomizer(pool) { ; }
+	NaiveRandomizer() { ; }
+	NaiveRandomizer(const std::vector<Shape>* pool): Randomizer(pool) { ; }
 	Shape Next(void);
 };

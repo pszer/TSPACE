@@ -5,11 +5,16 @@
 #include <map>
 #include <cstdint>
 
+#include "Timer.hpp"
+#include "Events.hpp"
+
 struct Mino {
 	Mino() { ; }
 	Mino(bool s, int8_t t): solid(s), type(t) { ; }
 	bool solid  = false;
 	int8_t type = 0;
+
+	std::string GetTypeTexture();
 };
 
 enum ROTATION { ROTATE_LEFT , ROTATE_RIGHT , ROTATE_180 };
@@ -27,6 +32,8 @@ struct Shape {
 	Mino& At(int8_t x, int8_t y);
 };
 
+enum { LEFT_WALL , RIGHT_WALL };
+
 // Tetrion is an entire playfield.
 struct Tetrion {
 	int width  = 10,
@@ -41,33 +48,6 @@ struct Tetrion {
 	Mino* At(int x, int y);
 
 	void EmplaceShape(int x, int y, Shape shape);
-};
-
-struct ActivePiece {
-	ActivePiece(int _x, int _y, Shape s): x(_x), y(_y), shape(s) { ; }
-
-	int x = 0, y = 0;
-	Shape shape;
-
-	// Handles a given action such as "Move Right"
-	virtual void HandleAction(const std::string& action, Keypress_State state, Tetrion& tetrion) { ; }
-
-	std::map<std::string, int> parameters;
-	int PARAMETER_UNDEFINED = 0;
-
-	void SetParameter(const std::string& str, int val) { parameters[str] = val; }
-	int GetParameter(const std::string& str) {
-		auto f = parameters.find(str);
-		if (f == parameters.end()) return PARAMETER_UNDEFINED;
-		return f->second;
-	}
-
-	virtual bool Done() { return false; }
-};
-
-struct ClassicActivePiece : public ActivePiece {
-	ClassicActivePiece(int x, int y, Shape s, int speed): ActivePiece(x,y,s)
-	  { SetParameter("speed",speed); }
-
-	void HandleAction(const std::string& action, Tetrion& tetrion) { ; }
+	bool ShapeCollides(int x, int y, Shape shape);
+	int  ShapeCollidesWall(int x, int y, Shape shape);
 };

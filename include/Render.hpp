@@ -42,6 +42,9 @@ extern struct Renderer {
 	void RenderTiledTexture(const std::string& tex_name, Rect rect, Vec2 scale, Vec2 offset);
 
 	SDL_Rect RenderText(const std::string& font_name, const std::string& text, int x, int y,
-	  FONT_SIZE, SDL_Color, TEXT_ALIGN align=ALIGN_LEFT);
+	  FONT_SIZE, SDL_Color, TEXT_ALIGN align=ALIGN_LEFT, double scale=1.0);
 	void RenderText(TTF_Font * font, const std::string& text, int x, int y, SDL_Color);
+
+	// Returns the scale of how everything should be rendered based on window size.
+	double GetWindowScale( void );
 } Renderer;

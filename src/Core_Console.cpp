@@ -83,6 +83,8 @@ void Core::Console::HandleKeypresses() {
 		End();
 	if (Event.GetKey(SDLK_HOME) == KEY_DOWN)
 		Home();
+
+	Event.Keypresses.clear();
 }
 
 void Core::Console::Toggle() {

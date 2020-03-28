@@ -17,7 +17,7 @@ void PlaySound(const std::string& fname, double volume, void (*update)(int,int),
 
 	if (Mix_Playing(CHANNEL)) return;
 
-	Mix_Volume(CHANNEL, static_cast<int>(volume * MIX_MAX_VOLUME));
+	Mix_Volume(CHANNEL, static_cast<int>(volume * MIX_MAX_VOLUME * GetCVarFloat(MASTER_VOLUME, 0.5)));
 	PlayingSounds.emplace_back(chunk, CHANNEL, update, reg);
 	auto& s = PlayingSounds.front();
 	if (s.update) s.update(s.channel, s.reg);

@@ -69,9 +69,11 @@ struct Command {
 extern std::map<std::string, Argument> CVARS;
 // GET CONSOLVE VARIABLES
 Argument * GetCVar(const std::string& id);
-long long GetCVarInt(const std::string& id);
-double    GetCVarFloat(const std::string& id);
-std::string GetCVarString(const std::string& id);
+// GET CONSOLVE VARIABLE AND RETURN DEFAULT VALUE IF NON-EXISTANT
+long long GetCVarInt(const std::string& id, long long def = 0);
+double    GetCVarFloat(const std::string& id, double def = 0.0);
+std::string GetCVarString(const std::string& id, std::string def = "");
+#define GetCVarDouble GetCVarFloat
 
 namespace Parser {
 

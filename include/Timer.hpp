@@ -23,6 +23,14 @@ struct Timer {
 
 	ch::nanoseconds GetTime();
 	double GetSeconds();
+
+	// %h is hours
+	// %m is minutes
+	// %s is seconds
+	// %d is milliseconds (2 places)
+	// %D is milliseconds (3 places)
+	// %% is a percent sign
+	std::string Format(const std::string& str);
 };
 
 extern struct FrameLimit {
